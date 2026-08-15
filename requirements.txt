@@ -1,0 +1,2 @@
+Pillow>=11.0,<12
+PyInstaller>=6.0,<7
