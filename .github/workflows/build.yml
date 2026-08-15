@@ -1,0 +1,72 @@
+name: Build desktop apps
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: NaiWaDesktopPet-Windows
+          - os: macos-latest
+            artifact: NaiWaDesktopPet-macOS
+          - os: ubuntu-latest
+            artifact: NaiWaDesktopPet-Linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Build
+        run: python build_cross_platform.py
+      - name: Package Windows
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release
+          Compress-Archive -Path dist/* -DestinationPath release/NaiWaDesktopPet-Windows.zip
+      - name: Package macOS
+        if: matrix.os == 'macos-latest'
+        shell: bash
+        run: |
+          mkdir -p release
+          cd dist
+          zip -qry ../release/NaiWaDesktopPet-macOS.zip .
+      - name: Package Linux
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          mkdir -p release
+          tar -czf release/NaiWaDesktopPet-Linux.tar.gz -C dist .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: release/*
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: NaiWaDesktopPet-*
+          path: release
+          merge-multiple: true
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/* --repo "$GITHUB_REPOSITORY" --title "NaiWa Desktop Pet $GITHUB_REF_NAME" --generate-notes
