@@ -6,5 +6,6 @@ dist/
 *.exe
 *.zip
 icon_preview.png
+奶娃.icns
 .idea/
 .vscode/

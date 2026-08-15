@@ -20,6 +20,7 @@ alpha = portrait.getchannel("A").point(lambda value: 0 if value < 18 else value)
 portrait.putalpha(alpha)
 
 portrait.save(root / "icon_preview.png")
+portrait.resize((1024, 1024), Image.Resampling.LANCZOS).save(root / "奶娃.icns", format="ICNS")
 portrait.save(
     root / "奶娃.ico",
     format="ICO",

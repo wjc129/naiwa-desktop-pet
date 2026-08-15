@@ -6,4 +6,4 @@ if exist "奶娃桌面宠物.exe" (
 )
 where conda >nul 2>nul
 if not errorlevel 1 call conda activate beijing
-start "" pythonw desktop_pet.pyw
+start "" pythonw desktop_pet_qt.py
