@@ -13,7 +13,7 @@
 
 ## 使用
 
-从 [Releases](../../releases) 下载 `奶娃桌面宠物.exe`，双击即可运行。
+从 [Releases](../../releases) 下载 `NaiWaDesktopPet.exe`，双击即可运行。
 
 也可以通过 Python 运行：
 
