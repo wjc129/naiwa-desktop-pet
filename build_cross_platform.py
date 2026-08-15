@@ -24,8 +24,6 @@ arguments = [
     "--add-data",
     f"{root / '奶娃.gif'}{separator}.",
     "--add-data",
-    f"{root / 'actions'}{separator}actions",
-    "--add-data",
     f"{root / 'icon_preview.png'}{separator}.",
     "--distpath",
     str(root / "dist"),
