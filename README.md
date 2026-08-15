@@ -11,7 +11,7 @@
 - 自动记住上次的位置和大小
 - 通过边缘连通区域检测去除 GIF 白色及灰色背景
 - 内置奶娃脸部多尺寸 Windows 应用图标
-- 捧腹大笑、挥手、犯困、惊讶和跳舞五种大肚子动作
+- 捧腹大笑、挥手、犯困、惊讶和跳舞五种扩展动作
 - 随机状态机，也可通过右键菜单立即播放指定动作
 - Qt 跨平台透明窗口，支持 Windows、macOS 和 Linux
 
@@ -41,3 +41,6 @@ python build_cross_platform.py
 ## 许可证
 
 项目代码使用 [MIT License](LICENSE) 开源。请确保在再分发时拥有动画素材 `奶娃.gif` 的相应使用权。
+
+扩展动作的角色比例、配色和表现形式参考了 MIT 开源项目
+[timerring/codex-pet-naiwa](https://github.com/timerring/codex-pet-naiwa)，并为本项目重新制作；原“思考”GIF 保持不变。
