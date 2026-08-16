@@ -1,5 +1,11 @@
 name: Build desktop apps
 
+env:
+  # The project contains Chinese asset names. English Windows runners otherwise
+  # use a legacy console encoding that cannot print those paths.
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
 permissions:
   contents: write
 
